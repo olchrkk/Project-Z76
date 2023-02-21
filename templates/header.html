@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olgagram</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+<div class="header">
+    <div class="header__container container">
+            <img src="{% static 'icons/olga3.png' %}"
+                 alt="logo">
+        <div class="header__items">
+            <a><img class="header__item"
+                 src="https://res.cloudinary.com/intellectfox/image/upload/v1629752944/fe/foxgram/header/direct_zvkzsg.svg "
+                    alt="direct"></a>
+            <a><img class="header__item"
+                 src="https://res.cloudinary.com/intellectfox/image/upload/v1629752944/fe/foxgram/header/notifications_m1be8e.svg "
+                    alt="notification"></a>
+            <a href="{% url 'logout' %}"><img class="header__item"
+                 src="https://res.cloudinary.com/intellectfox/image/upload/v1629752944/fe/foxgram/header/profile_xr60wq.svg "
+                    alt="profile"></a>
+        </div>
+    </div>
+</div>
+{% block content %}{% endblock content %}
+<div class="footer">
+    <div class="footer__container container">
+        <div class="footer__items">
+            <div class="footer_bar">
+                <a href="{% url 'index' %}"><img class="footer__item"
+                     src="{% static 'icons/home.png' %}"
+                    alt="home"></a>
+            </div>
+            <div class="footer_bar">
+                <img class="footer__item"
+                     src="{% static 'icons/find.png' %}"
+                     alt="find">
+            </div>
+            <div class="footer_bar">
+                <img class="footer__item" style="width:60; height:60;"
+                     src="{% static 'icons/add_post.png' %}"
+                     alt="add">
+            </div>
+            <div class="footer_bar">
+                <img class="footer__item"
+                     src="{% static 'icons/like_off.svg' %}"
+                     alt="like">
+            </div>
+            <div class="footer_bar">
+                <img class="footer__item"
+                     src="{% static 'icons/profile.png' %}"
+                     alt="profile">
+            </div>
+        </div>
+        </div>
+</div>
+</body>
+</html>

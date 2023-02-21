@@ -1,0 +1,152 @@
+{% extends "header.html" %}
+
+{% load static %}
+
+{% block content %}
+<body>
+<div class="container">
+    <div class="stories">
+        <div class="story">
+            <div class="story__gr">
+                <img src="https://res.cloudinary.com/intellectfox/image/upload/v1630263824/fe/foxgram/stories/intellectfox_s3eiyu.jpg"
+                     alt="intellectfox" class="story__gr-img">
+            </div>
+            <span class="story__name">intellectfox</span>
+        </div>
+        <div class="story">
+            <div class="story__gr">
+                <img class="story__gr-img"
+                     src="https://res.cloudinary.com/intellectfox/image/upload/v1630263615/fe/foxgram/stories/zuck_ofva76.jpg"
+                     alt="zuck">
+            </div>
+            <span class="story__name">zuck</span>
+        </div>
+        <div class="story">
+            <div class="story__gr">
+                <img src="https://res.cloudinary.com/intellectfox/image/upload/v1630263676/fe/foxgram/stories/elon.mask_cwjn5g.jpg"
+                     alt="elon.mask" class="story__gr-img">
+            </div>
+            <span class="story__name">elon.mask</span>
+        </div>
+        <div class="story">
+            <div class="story__gr">
+                <img src="https://res.cloudinary.com/intellectfox/image/upload/v1630263720/fe/foxgram/stories/bezos_we8ahw.jpg"
+                     alt="bezos" class="story__gr-img">
+            </div>
+            <span class="story__name">bezos</span>
+        </div>
+        <div class="story">
+            <div class="story__gr">
+                <img src="https://res.cloudinary.com/intellectfox/image/upload/v1630263772/fe/foxgram/stories/tim_cook_ot6eos.jpg"
+                     alt="tim_cook" class="story__gr-img">
+            </div>
+            <span class="story__name">tim_cook</span>
+        </div>
+        <div class="story">
+            <div class="story__gr">
+                <img src="https://res.cloudinary.com/intellectfox/image/upload/v1630263547/fe/foxgram/stories/bill.gates_hbfshl.jpg"
+                     alt="bikk.gates" class="story__gr-img">
+            </div>
+            <span class="story__name">bill.gates</span>
+        </div>
+    </div>
+
+    {% for post in posts %}
+    <div class="post">
+        <div class="post__header">
+            <img class="post__publisher-image"
+                 src="https://res.cloudinary.com/intellectfox/image/upload/v1629752958/fe/foxgram/posts/intellectfox_jq4lbe.svg "
+                 alt="avatar">
+            <span class="post__publisher-name">{{post.author}}</span>
+        </div>
+        <img class="post__img"
+             src="https://res.cloudinary.com/intellectfox/image/upload/v1629752958/fe/foxgram/posts/post-1_nm8jbv.jpg  "
+             alt="post_1">
+        <div class="post__footer">
+            <div class="like">
+                <a href="{% url 'post-comment' id=post.id %}"><img class="comment__image"
+                                                                   src="{% static 'icons/comment.png' %} "
+                                                                   alt="comment"></a>
+
+                {% if user not in post.likes.all %}
+                <form action="{% url 'blog-post-likes' %}" method="post" class="like-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="user_id" value="{{post.id}}">
+                    <button type="submit" class="link-primary btn"
+                            style="padding: 0;border: none;font: inherit;color: inherit;background-color: transparent;cursor: pointer">
+                        <img style="margin-right: 16px;"
+                                src="{% static 'icons/like_off.svg' %}">
+                    </button>
+                </form>
+                {% else %}
+                <form action="{% url 'blog-post-likes' %}" method="post" class="like-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="user_id" value="{{post.id}}">
+                    <button type="submit" class="link-primary btn"
+                            style="padding: 0; border: none;font: inherit;color: inherit;background-color: transparent;cursor: pointer">
+                        <img style="margin-right: 16px;"
+                                src="{% static 'icons/like_on.svg' %}"></button>
+                </form>
+                {% endif %}
+
+                <span class="like__text">{{post.likesCount}} отметок "Нравится"</span>
+            </div>
+            <div class="description">
+                <div class="description__publisher">{{post.author}}</div>
+                <div class="description__text">{{post.content}}</div>
+            </div>
+        </div>
+
+        <div class="post__comment">
+            <div class="view_all_comments">
+                <a href="{% url 'post-comment' id=post.id %}" style="text-decoration: none;"><span
+                        class="all_comments">Посмотреть все {{comment.commentsCount}} комментарии</span></a>
+            </div>
+                    {% if comments %}
+        {% for comment in last_two_comments %}
+            <div class="description__comment">
+                                <div class="post__publisher-image">
+                    <img src="#" alt="photo">
+                </div>
+                <div>
+                    <div class="description__publisher__comment">{{comment.user}}</div>
+                    <div class="description__text__comment"> {{ comment.content }}</div>
+                </div>
+                            <div class="post__comment__like" style="margin-left: auto">
+                    {% if user not in comment.likes.all %}
+                    <form action="{% url 'blog-comment-likes' %}" method="post" class="follow-form">
+                        {% csrf_token %}
+                        <input type="hidden" name="comment_id" value="{{comment.id}}">
+                        <button type="submit" class="link-primary btn"
+                                style="padding: 0;border: none;font: inherit;color: inherit;background-color: transparent; cursor: pointer">
+                            <img class="like__comment-img"
+                                 src="{% static 'icons/like_off.svg' %}">
+                        </button>
+                    </form>
+                    {% else %}
+                    <form action="{% url 'blog-comment-likes' %}" method="post" class="follow-form">
+                        {% csrf_token %}
+                        <input type="hidden" name="comment_id" value="{{comment.id}}">
+                        <button type="submit" class="link-primary btn"
+                                style="padding: 0;border: none;font: inherit;color: inherit;background-color: transparent;cursor: pointer">
+                            <img class="like__comment-img"
+                                 src="{% static 'icons/like_on.svg' %}"></button>
+                        <span class="like__text">{{comment.likesCount}}</span>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+                                {% endfor %}
+        {% endif %}
+            <div class="published">
+                <span class="published_date"> {{ post.published_date }} </span>
+            </div>
+
+        </div>
+
+    </div>
+    {% endfor %}
+</div>
+</body>
+
+{% endblock content %}
