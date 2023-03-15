@@ -13,9 +13,9 @@
                 <img src="{{otherUser.photo.url}}"
                      class="user_photo" width="150">
             </div>
-            <div class="ml-3 w-100">
+            <div class="ml-3" style="width:100%">
                 <h4 class="mb-0 mt-0">{{otherUser.user}}</h4>
-                <span style="margin-bottom:20px;">{{otherUser.bio}}</span>
+                <span style="margin-bottom:20px;">{{otherUser.bio|linebreaksbr}}</span>
                 <div class="all_articles rounded text-white stats">
                     <div class="articles_profile">
                         <span class="articles">Posts</span>

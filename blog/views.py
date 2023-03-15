@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, DeleteView
 from .models import Post, Comment, UserProfile
 from django.utils import timezone
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
 
 
 class IndexView(TemplateView):
@@ -47,6 +48,14 @@ class PostView(TemplateView):
         post.delete()
 
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+class PostDeleteView(DeleteView):
+    model = Post
+    success_url = reverse_lazy('index')
+
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
 
 
 class PostCreateView(TemplateView):

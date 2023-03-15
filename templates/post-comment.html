@@ -13,9 +13,8 @@
             <span class="post__publisher-name">{{ post.user }}</span>
             <div class="delete__post">
                 {% if user.id == post.user.id %}
-        <form action="{% url 'blog-post-delete' %}" method="post">
+        <form action="{% url 'blog-post-delete' post.id%}" method="post">
             {% csrf_token %}
-            <input type="hidden" name="post_id" value="{{post.id}}">
             <button class="link-primary btn" type="submit" style="border:none;background-color: transparent;"><img
                     style="height: 16px;margin-left:450px;"
                     src="{% static 'icons/delete_post.png' %}"></button>
@@ -51,7 +50,7 @@
             </div>
             <div class="description">
                 <div class="description__publisher">{{ post.user }}</div>
-                <div class="description__text">{{ post.content }}</div>
+                <div class="description__text">{{ post.content|linebreaksbr }}</div>
             </div>
             <div class="published">
                 <span class="published_date"> {{post.published_date|date:"j N P" }}</span>
