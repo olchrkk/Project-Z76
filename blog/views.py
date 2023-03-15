@@ -33,10 +33,10 @@ class PostView(TemplateView):
     @method_decorator(login_required)
     def get(self, request, id):
         post = Post.objects.get(id=id)
-        account = UserProfile.objects.get(id=id)
+        # account = UserProfile.objects.get(id=id)
         comments = Comment.objects.filter(post__id=id)
         params = {
-            'account': account,
+            # 'account': account,
             'post': post,
             'comments': comments,
         }
@@ -54,7 +54,7 @@ class PostCreateView(TemplateView):
 
     def post(self, request):
         content = request.POST["new_post"]
-        cover = request.POST["new_cover"]
+        cover = request.FILES["new_cover"]
         Post.objects.create(user=request.user, content=content, cover=cover)
 
         return redirect('index')

@@ -68,6 +68,7 @@
             </div>
             {% if post.comments.all %}
             {% for comment in post.comments.all %}
+            {% if forloop.counter <= 2 %}
             <div class="description__comment">
                 <div class="post__publisher-image">
                     <a href="{{ comment.user.profile.first.get_user_url }}" style="text-decoration: none;color:black;">
@@ -100,6 +101,7 @@
                     {% endif %}
                 </div>
             </div>
+            {% endif %}
             {% endfor %}
             {% endif %}
             <div class="published">

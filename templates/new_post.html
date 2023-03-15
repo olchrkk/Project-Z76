@@ -40,8 +40,8 @@ body {
 
     <form method="post" action="{% url 'post-create' %}">
         {% csrf_token %}
-        <img class="mb-2" src="{% static 'icons/logo.png' %}" alt="" width="85" height="85">
-        <label for="floatingInput">Select your image</label>
+<!--        <img class="mb-2" src="{% static 'icons/logo.png' %}" alt="" width="85" height="85">-->
+        <label for="floatingInput">Create your new post here</label>
         <div class="">
             <input type="file" class="form-control" id="floatingInput" name="new_cover" accept="sourse/"
                    value="{{user.cover.url}}">
