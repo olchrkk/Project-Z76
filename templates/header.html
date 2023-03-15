@@ -7,22 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Olgagram</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    {% block styles %}{% endblock styles %}
 </head>
 <body>
 <div class="header">
     <div class="header__container container">
-            <img src="{% static 'icons/olga3.png' %}"
-                 alt="logo">
+        <a href="{% url 'index' %}"> <img src="{% static 'icons/olga3.png' %}"
+             alt="logo"></a>
         <div class="header__items">
-            <a><img class="header__item"
-                 src="https://res.cloudinary.com/intellectfox/image/upload/v1629752944/fe/foxgram/header/direct_zvkzsg.svg "
-                    alt="direct"></a>
-            <a><img class="header__item"
-                 src="https://res.cloudinary.com/intellectfox/image/upload/v1629752944/fe/foxgram/header/notifications_m1be8e.svg "
-                    alt="notification"></a>
-            <a href="{% url 'logout' %}"><img class="header__item"
-                 src="https://res.cloudinary.com/intellectfox/image/upload/v1629752944/fe/foxgram/header/profile_xr60wq.svg "
-                    alt="profile"></a>
+            <form class="d-flex" action="{% url 'post-search' %}" method="post">
+                {% csrf_token %}
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="content">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+            <div class="header__items">
+                <a href="{% url 'logout' %}"><img class="header__item" style="width:40px;height:40px;"
+                                                  src="{% static 'icons/log-out.png' %}"
+                                                  alt="profile"></a>
+
         </div>
     </div>
 </div>
@@ -32,31 +35,21 @@
         <div class="footer__items">
             <div class="footer_bar">
                 <a href="{% url 'index' %}"><img class="footer__item"
-                     src="{% static 'icons/home.png' %}"
-                    alt="home"></a>
+                                                 src="{% static 'icons/home.png' %}"
+                                                 alt="home"></a>
             </div>
             <div class="footer_bar">
-                <img class="footer__item"
-                     src="{% static 'icons/find.png' %}"
-                     alt="find">
-            </div>
-            <div class="footer_bar">
-                <img class="footer__item" style="width:60; height:60;"
+               <a href="{% url 'post-create' %}"> <img class="footer__item" style="width:60; height:60;"
                      src="{% static 'icons/add_post.png' %}"
-                     alt="add">
+                     alt="add"></a>
             </div>
             <div class="footer_bar">
-                <img class="footer__item"
-                     src="{% static 'icons/like_off.svg' %}"
-                     alt="like">
-            </div>
-            <div class="footer_bar">
-                <img class="footer__item"
+               <a href="{% url 'user_account' user.id %}"><img class="footer__item"
                      src="{% static 'icons/profile.png' %}"
-                     alt="profile">
+                     alt="profile"></a>
             </div>
         </div>
-        </div>
+    </div>
 </div>
 </body>
 </html>

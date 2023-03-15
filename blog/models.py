@@ -1,12 +1,13 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from users.models import UserProfile
 
 
 class Post(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='posts')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='posts')
     content = models.TextField(blank=True)
-    cover = models.ImageField(upload_to='source/')
+    cover = models.ImageField(upload_to='source/', blank=False)
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
     likes = models.ManyToManyField(User, blank=True, related_name='liked_posts')
@@ -19,8 +20,8 @@ class Post(models.Model):
     def likesCount(self):
         return len([like for like in self.likes.all()]) if [[like for like in self.likes.all()]] else 0
 
-    def commentsCount(self):
-        return len([comment for comment in self.commented.all()]) if [[comment for comment in self.commented.all()]] else None
+    # def commentsCount(self):
+    #     return len([comment for comment in self.commented.all()]) if [[comment for comment in self.commented.all()]] else None
 
 
 class Comment(models.Model):

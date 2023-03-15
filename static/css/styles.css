@@ -92,16 +92,27 @@ body {
 
 .post__publisher-image {
     margin-right: 16px;
+    width:40px;
+    height:40px;
+    border-radius: 100px;
+   object-fit: cover;
 }
 
-.post__publisher-name,
 .like__text {
     font-weight: 700;
+
+}
+
+.post__publisher-name{
+    font-weight: 700;
+        vertical-align: 13px;
 }
 
 .post__img {
     display: block;
     width: 100%;
+    height:606.4px;
+    object-fit: cover;
 }
 
 .post__footer {
@@ -121,8 +132,8 @@ body {
 }
 
 .comment__image {
-width:32px;
-height: 30px;
+    width:32px;
+    height: 30px;
 }
 
 .description,
@@ -140,33 +151,33 @@ height: 30px;
 .view_all_comments,
 .description__comment,
 .published {
-margin-bottom:10px;
+    margin-bottom:10px;
 }
 
 .published_date,
 .description__publisher__date {
-font-weight:300;
-font-size:13px;
+    font-weight:300;
+    font-size:13px;
 }
 
 .all_comments {
-font-weight:300;
-font-size:14px;
-color:black;
-text-decoration: none!important;
+    font-weight:300;
+    font-size:14px;
+    color:black;
+    text-decoration: none!important;
 }
 
 .like__comment-img {
-weight:15px;
-height:15px;
+    weight:15px;
+    height:15px;
 }
 
 .description__comment {
-justify-content: space-between;
+    justify-content: space-between;
 }
 
 .post__comment__like {
-margin-left: auto;
+    margin-left: auto;
 }
 
 .post__comment {
@@ -189,7 +200,7 @@ margin-left: auto;
     align-items: center;
     background-color: #ffff;
     justify-content: space-between;
-    padding: 15px 50px;
+    padding: 15px 100px;
 }
 
 .footer_bar {
@@ -199,18 +210,174 @@ margin-left: auto;
     height: 30px;
 }
 
-.footer_bar:nth-child(3) {
+.footer_bar:nth-child(2) {
     width: 39px;
     height: 39px;
 }
 
-.comment-box textarea {
-width: 400px;
-resize:inherit;
-border-radius:10px;
-border:none;
-box-shadow: 0 0 0 0.5px #0003;
+.comment-box {
+    display:flex;
+    align-items:center;
+    padding: 5px 24px;
 }
+
+.comment-box form {
+  border: 1px solid #dcdcdc;
+  padding: 0px 20px 4px 0px;
+  width: 500px;
+  height: 30px;
+  border-radius: 9px;
+}
+
+.header__items form {
+border: 1px solid #dcdcdc;
+  padding: 0px 20px 4px 0px;
+  width: 300px;
+  height: 30px;
+  border-radius: 9px;
+}
+
+.header__items input{
+width:200px;
+border: none;
+outline:0!important;
+}
+
+.comment-box textarea {
+    resize:inherit;
+    border-radius:10px;
+  border: none;
+  margin: 0;
+outline:0!important;
+  -webkit-appearance: none;
+  height: 29px;
+  vertical-align: top;
+  font-weight: 300;
+  font-size: 13px;
+  width: 360px;
+}
+
+.comment-box button,
+.header__items button {
+  border: none;
+  margin: 0;
+  padding: 7px 0 0 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  background-color: transparent;
+  cursor: pointer;
+  transition: color .2s;
+}
+
+.post__comment__like button,
+.like button,
+.basket button{
+    padding: 0;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+
+
+.card {
+border: 1px solid #c4c4c4;
+display:flex;
+width: 100%;
+background-color: #fff;
+padding: 24px;
+    margin-bottom: 20px;
+}
+
+.stats{
+  background: #f2f5f8 !important;
+  color: #000 !important;
+  padding: 24px;
+    margin-bottom: 5px;
+}
+.articles,
+.followers,
+.following {
+  color: #a1aab9;
+  text-align:center;
+}
+.number1,
+.number2,
+.number3 {
+  font-weight:400;
+  text-align:center;
+}
+
+.user_photo {
+border-radius: 100px;
+   object-fit: cover;
+}
+
+.mb-0 {
+font-weight: 700;
+font-size:25px;
+}
+.button_profile {
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.btn-profile {
+border: 1px solid #dcdcdc;
+border-radius: 9px;
+padding:5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    background-color: transparent;
+    cursor: pointer;
+    transition: color .2s;
+    font-size:15px;
+    margin:5px;
+}
+
+.card_profile {
+display:flex;
+align-items:center;
+width:100%
+}
+
+.all_articles {
+width:100%;
+padding:0 20px 0 25px;
+margin-top:2px;
+display:flex;
+justify-content:space-between;
+
+}
+
+.articles_profile {
+display:flex;
+flex-direction:column;
+}
+
+TD {
+    vertical-align: top; /* Выравнивание по верхнему краю ячейки */
+    padding:0 1px 0 1px;
+   }
+   #col1 {
+    width: 202px; /* Ширина первой колонки */
+    height:202px;
+    background: #fc0; /* Цвет фона первой колонки */
+   }
+   #col2 {
+    width: 202px; /* Ширина второй колонки */
+    height:202px;
+    background: #f0f0f0; /* Цвет фона второй колонки */
+   }
+   #col3 {
+    width: 202px; /* Ширина третьей колонки */
+    height:202px;
+    background: #fc0; /* Цвет фона третьей колонки */
+   }
+  </style>
 
 
 

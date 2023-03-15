@@ -61,6 +61,11 @@ body {
             <label>
                 <a href="{% url 'password_reset' %}" style="text-decoration: none; color: #5c5a5a!important;"> Forgot password? </a>
             </label>
+            <div class="checkbox mb-3">
+            <label>
+                <a href="{% url 'signup' %}" style="text-decoration: none; color: #5c5a5a!important;"> Registration </a>
+            </label>
+        </div>
         </div>
         <button class="w-100 btn btn-lg" style='background: linear-gradient(180deg, rgb(26, 255, 187), rgb(31, 186, 245));'
            type="submit" href="{% url 'login' %}">Sing in</button>

@@ -1,11 +1,57 @@
-{% extends 'header.html '%}
+{% extends "header.html" %}
 
 {% load static %}
+
+{% load crispy_forms_tags %}
 
 {% block content %}
 
 <div class="container">
-    <div class="post">
+    <div class="card">
+        <div class="card_profile">
+            <div class="image" style='margin-right:24px;'>
+                <img src="{{otherUser.photo.url}}"
+                     class="user_photo" width="150">
+            </div>
+            <div class="ml-3 w-100">
+                <h4 class="mb-0 mt-0">{{otherUser.user}}</h4>
+                <span style="margin-bottom:20px;">{{otherUser.bio}}</span>
+                <div class="all_articles rounded text-white stats">
+                    <div class="articles_profile">
+                        <span class="articles">Posts</span>
+                        <span class="number1">38</span>
+                    </div>
+                    <div class="articles_profile">
+                        <span class="followers">Followers</span>
+                        <span class="number2">980</span>
+                    </div>
+                    <div class="articles_profile">
+                        <span class="following">Following</span>
+                        <span class="number3">8.9</span>
+                    </div>
+                </div>
+                <div class="button_profile">
+                    <button class="btn-profile">Edit Profile</button>
+
+                    {% if otherUser.user not in followed_users %}
+            <form action="{% url 'user-follows' %}" method="post" class="follow-form">
+                {% csrf_token %}
+                <input type="hidden" name="user_id" value="{{post.user.id}}">
+                <button type="submit" class="btn-profile">Follow</button>
+            </form>
+            {% else  %}
+            <form action="{% url 'user-follows' %}" method="post" class="follow-form">
+                {% csrf_token %}
+                <input type="hidden" name="user_id" value="{{post.user.id}}">
+                <button type="submit" class="btn-profile">Unfollow</button>
+            </form>
+            {%endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+        {% for post in otherUser.post.all %}
+        <div class="post">
         <div class="post__header">
             <img class="post__publisher-image"
                  src="{{post.user.profile.first.photo.url}}"
@@ -115,12 +161,13 @@
             <form method="post" action="{% url 'blog-post-comment-create' %}">
                 {% csrf_token %}
                 <input type="hidden" name="post_id" value="{{post.id}}">
-                <textarea placeholder="Your message..." name="new_comment" required></textarea>
+                <textarea placeholder="Your message..." name="new_comment"></textarea>
                 <button class="btn-xs" type="submit"> Comment</button>
             </form>
         </div>
     </div>
+        {% endfor %}
+    </table>
 </div>
 
 {% endblock content %}
-
