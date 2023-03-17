@@ -23,11 +23,11 @@
                     </div>
                     <div class="articles_profile">
                         <span class="followers">Followers</span>
-                        <span class="number2">980</span>
+                        <span class="number2">{{otherUser.followsCount}}</span>
                     </div>
                     <div class="articles_profile">
                         <span class="following">Following</span>
-                        <span class="number3">8.9</span>
+                        <span class="number3">{{otherUser.followersCount}}</span>
                     </div>
                 </div>
                 <div class="button_profile">
@@ -50,123 +50,16 @@
             </div>
         </div>
     </div>
-        {% for post in otherUser.post.all %}
-        <div class="post">
-        <div class="post__header">
-            <img class="post__publisher-image"
-                 src="{{post.user.profile.first.photo.url}}"
-                 alt="avatar">
-            <span class="post__publisher-name">{{ post.user }}</span>
-            <div class="delete__post">
-                {% if user.id == post.user.id %}
-        <form action="{% url 'blog-post-delete' %}" method="post">
-            {% csrf_token %}
-            <input type="hidden" name="post_id" value="{{post.id}}">
-            <button class="link-primary btn" type="submit" style="border:none;background-color: transparent;"><img
-                    style="height: 16px;margin-left:450px;"
-                    src="{% static 'icons/delete_post.png' %}"></button>
-        </form>
-        {% endif %}
-            </div>
-        </div>
+        {% for post in otherUser.posts.all %}
+    <div class="post">
+        <a href="{% url 'post-comment' id=post.id %}" style="text-decoration: none;">
         <img class="post__img"
              src="{{post.cover.url}}"
              alt="post_1">
-        <div class="post__footer">
-            <div class="like">
-                {% if user not in post.likes.all %}
-                <form action="{% url 'blog-post-likes' %}" method="post" class="like-form">
-                    {% csrf_token %}
-                    <input type="hidden" name="user_id" value="{{post.id}}">
-                    <button type="submit" class="link-primary btn">
-                        <img style="margin-right: 16px;"
-                             src="{% static 'icons/like_off.svg' %}">
-                    </button>
-                </form>
-                {% else %}
-                <form action="{% url 'blog-post-likes' %}" method="post" class="like-form">
-                    {% csrf_token %}
-                    <input type="hidden" name="user_id" value="{{post.id}}">
-                    <button type="submit" class="link-primary btn">
-                        <img style="margin-right: 16px;"
-                             src="{% static 'icons/like_on.svg' %}"></button>
-                </form>
-                {% endif %}
-
-                <span class="like__text">{{post.likesCount}} отметок "Нравится"</span>
-            </div>
-            <div class="description">
-                <div class="description__publisher">{{ post.user }}</div>
-                <div class="description__text">{{ post.content }}</div>
-            </div>
-            <div class="published">
-                <span class="published_date"> {{post.published_date|date:"j N P" }}</span>
-            </div>
-        </div>
-        {% if comments %}
-        {% for comment in comments %}
-        <div class="post__comment">
-            <div class="description__comment">
-                <div class="post__publisher-image">
-                    <a href="{{ comment.user.profile.first.get_user_url }}" style="text-decoration: none;color:black;">
-                    <img class="post__publisher-image" src="{{comment.user.profile.first.photo.url}}" alt="photo">
-                    </a>
-                </div>
-                <div>
-                    <div class="description__publisher__comment"><a href="{{ comment.user.profile.first.get_user_url }}" style="text-decoration: none;color:black;">{{comment.user}} </a>
-                        <span
-                            class="description__publisher__date">{{comment.created|timesince}} ago</span></div>
-                    <div class="description__text__comment"> {{ comment.content }}</div>
-                </div>
-                <div class="post__comment__like" style="margin-left: auto">
-                    {% if user not in comment.likes.all %}
-                    <form action="{% url 'blog-comment-likes' %}" method="post" class="follow-form">
-                        {% csrf_token %}
-                        <input type="hidden" name="comment_id" value="{{comment.id}}">
-                        <button type="submit" class="link-primary btn">
-                            <img class="like__comment-img"
-                                 src="{% static 'icons/like_off.svg' %}">
-                        </button>
-                    </form>
-                    {% else %}
-                    <form action="{% url 'blog-comment-likes' %}" method="post" class="follow-form">
-                        {% csrf_token %}
-                        <input type="hidden" name="comment_id" value="{{comment.id}}">
-                        <button type="submit" class="link-primary btn">
-                            <img class="like__comment-img"
-                                 src="{% static 'icons/like_on.svg' %}"></button>
-                        <span class="like__text">{{comment.likesCount}}</span>
-                    </form>
-                    {% endif %}
-                </div>
-                <div class="basket">
-                {% if user.id == comment.user.id %}
-        <form action="{% url 'blog-post-comment-delete' %}" method="post">
-            {% csrf_token %}
-            <input type="hidden" name="comment_id" value="{{comment.id}}">
-            <button class="link-primary btn" type="submit" style="border:none;background-color: transparent;"><img
-                    style="height: 16px; margin-bottom:7px"
-                    src="{% static 'icons/delete.png' %}"></button>
-        </form>
-        {% endif %}
-            </div>
-            </div>
-        </div>
-        {% endfor %}
-        {% endif %}
-        <div class="comment-box">
-            <div class="post__publisher-image">
-                <img class="post__publisher-image" src="{{user.profile.first.photo.url}}" alt="photo">
-            </div>
-            <form method="post" action="{% url 'blog-post-comment-create' %}">
-                {% csrf_token %}
-                <input type="hidden" name="post_id" value="{{post.id}}">
-                <textarea placeholder="Your message..." name="new_comment"></textarea>
-                <button class="btn-xs" type="submit"> Comment</button>
-            </form>
-        </div>
+        </a>
     </div>
         {% endfor %}
+    </div>
     </table>
 </div>
 

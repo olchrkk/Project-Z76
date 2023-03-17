@@ -124,9 +124,8 @@ class SearchView(TemplateView):
         posts = posts_by_content
         # posts = posts_by_author.union(posts_by_content, all=False)
         params = {
-            'posts': posts
+            'posts_recent': posts,
         }
-
         return render(request, self.template_name, params)
 
 

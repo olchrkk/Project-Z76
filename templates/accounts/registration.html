@@ -14,7 +14,7 @@
 body {
     display: flex;
     align-items: center;
-    padding-top: 120px;
+    padding-top: 50px;
 }
 
 .form-signin {
@@ -29,6 +29,7 @@ body {
 .w-100 {
     width: 100%!important;
 }
+
 
 
 
@@ -75,10 +76,19 @@ body {
         </div>
 
         <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword1" placeholder="Repeat password" name="password2">
+            <input type="password" class="form-control" id="floatingPassword1" placeholder="Repeat password"
+                   name="password2">
             <label for="floatingPassword1">Repeat your password</label>
         </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInput6" placeholder="Bio" name="bio">
+            <label for="floatingInput6">Bio</label>
+        </div>
 
+        <div class="">
+            <input type="file" class="form-control" id="floatingInput5" name="photo" accept="image/"
+                   style="margin-bottom: 10px">
+        </div>
 
         <a class="w-100 btn btn-lg" style='background: linear-gradient(180deg, rgb(26, 255, 187), rgb(31, 186, 245));'
            type="submit" href="{% url 'login' %}">Create new account</a>
