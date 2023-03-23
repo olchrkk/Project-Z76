@@ -1,0 +1,24 @@
+{% extend 'header.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+<div class="container">
+    {% if last_users %}
+    <div class="stories">
+ {% for sug_user in last_users %}
+        <div class="story">
+             <div class="story__gr">
+                <img src="{{sug_user.photo.url}}"
+                     alt="photo" class="story__gr-img">
+            </div>
+            <span class="story__name"><a href="{{ sug_user.get_user_url }}" style="text-decoration: none;color:black;">{{sug_user.user}}</a></span>
+        </div>
+{% endfor %}
+    </div>
+{% endif %}
+</div>
+
+{% endblock %}

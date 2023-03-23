@@ -4,6 +4,7 @@ from django.views.generic import TemplateView
 from .forms import UserRegistrationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
+from users.models import UserProfile
 
 
 class SignUpView(TemplateView):
@@ -18,6 +19,7 @@ class SignUpView(TemplateView):
             new_user = user_form.save(commit=False)
             new_user.set_password(user_form.cleaned_data['password'])
             new_user.save()
+            UserProfile.objects.creat(user=new_user)
             new_user = authenticate(
                 username=user_form.cleaned_data['username'], password=user_form.cleaned_data['password'])
             login(request, new_user)
