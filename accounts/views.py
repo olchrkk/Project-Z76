@@ -13,18 +13,18 @@ class SignUpView(TemplateView):
     def get(self, request):
         return render(request, self.template_name)
 
-    def post(self, request):
-        user_form = UserRegistrationForm(request.POST)
-        if user_form.is_valid():
-            new_user = user_form.save(commit=False)
-            new_user.set_password(user_form.cleaned_data['password'])
-            new_user.save()
-            UserProfile.objects.creat(user=new_user)
-            new_user = authenticate(
-                username=user_form.cleaned_data['username'], password=user_form.cleaned_data['password'])
-            login(request, new_user)
-            return redirect('index')
-        return render(request, self.template_name, {'user_form': user_form})
+    # def post(self, request):
+    #     user_form = UserRegistrationForm(request.POST)
+    #     # if user_form.is_valid():
+    #     #     new_user = user_form.save(commit=False)
+    #     #     new_user.set_password(user_form.cleaned_data['password'])
+    #     #     new_user.save()
+    #     #     UserProfile.objects.create(user=new_user)
+    #     #     new_user = authenticate(
+    #     #         username=user_form.cleaned_data['username'], password=user_form.cleaned_data['password'])
+    #     #     login(request, new_user)
+    #     #     return redirect('index')
+    #     return render(request, self.template_name, {'user_form': user_form})
 
 
 

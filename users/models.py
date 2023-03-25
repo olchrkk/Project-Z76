@@ -9,7 +9,7 @@ class UserProfile(models.Model):
     email = models.EmailField(unique=True)
     photo = models.ImageField(null=True, blank=True, default="default_photo_account.png")
     bio = models.TextField(null=True, blank=True)
-    follows = models.ManyToManyField(User, blank=True, related_name='followers')
+    follows = models.ManyToManyField('UserProfile', blank=True, related_name='followers')
 
     def display_follows(self):
         return ", ".join([user.username for user in self.follows.all()])
