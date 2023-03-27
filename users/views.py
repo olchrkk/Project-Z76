@@ -1,9 +1,11 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required
 from .models import UserProfile
+from accounts.forms import UserRegistrationForm
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 
@@ -65,3 +67,22 @@ class FollowingView(TemplateView):
             'title': f"{user.username}'s follows"
         }
         return render(request, self.template_name, params)
+
+
+class EditUserProfile(TemplateView):
+    template_name = 'edit_userAccount.html'
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+    def post(self, request):
+        user_form = UserRegistrationForm(request.POST, request.FILES, instance=request.user)
+        if user_form.is_valid():
+            new_user = user_form.save(commit=False)
+            new_user.set_password(user_form.cleaned_data['password'])
+            new_user.save()
+            new_user = authenticate(
+                username=user_form.cleaned_data['username'], password=user_form.cleaned_data['password'])
+            login(request, new_user)
+            return redirect('index')
+        return render(request, self.template_name, {'user_form': user_form})

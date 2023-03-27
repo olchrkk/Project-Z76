@@ -22,45 +22,47 @@
                         <span class="number1">38</span>
                     </div>
                     <div class="articles_profile">
-                        <span class="followers"><a href='#'>Followers</a></span>
+                        <span class="followers"><a href='{% url "user-followers" %}' class="followers" style="text-decoration:none;">Followers</a></span>
                         <span class="number2">{{otherUser.followsCount}}</span>
                     </div>
                     <div class="articles_profile">
-                        <span class="following"><a href='#'>Following</a></span>
+                        <span class="following"><a href='{% url "user-following" %}' class="following" style="text-decoration:none;">Following</a></span>
                         <span class="number3">{{otherUser.followersCount}}</span>
                     </div>
                 </div>
                 <div class="button_profile">
-                    <button class="btn-profile">Edit Profile</button>
-
-<!--                    {% if otherUser.user not in followed_users %}-->
-<!--            <form action="{% url 'user-follows' %}" method="post" class="follow-form">-->
-<!--                {% csrf_token %}-->
-<!--                <input type="hidden" name="user_id" value="{{post.user.id}}">-->
-<!--                <button type="submit" class="btn-profile">Follow</button>-->
-<!--            </form>-->
-<!--            {% else  %}-->
-<!--            <form action="{% url 'user-follows' %}" method="post" class="follow-form">-->
-<!--                {% csrf_token %}-->
-<!--                <input type="hidden" name="user_id" value="{{post.user.id}}">-->
-<!--                <button type="submit" class="btn-profile">Unfollow</button>-->
-<!--            </form>-->
-<!--            {%endif %}-->
+                    {% if user != otherUser %}
+                        {% if otherUser in user.follows.all %}
+                        <form action="{% url 'user-follows' %}" method="post" class="follow-form">
+                            {% csrf_token %}
+                            <input type="hidden" name="user_id" value="otherUser.id">
+                            <button type="submit" class="btn-profile">Unfollow</button>
+                        </form>
+                        {% else %}
+                        <form action="{% url 'user-follows' %}" method="post" class="follow-form">
+                            {% csrf_token %}
+                            <input type="hidden" name="user_id" value="{{otherUser.id}}">
+                            <button type="submit" class="btn-profile">Follow</button>
+                        </form>
+                        {% endif%}
+                    {% else %}
+                    <a href="{% url 'user-edit' %}" class="btn-profile">Edit Profile</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
-        {% for post in otherUser.posts.all %}
+    {% for post in otherUser.posts.all %}
     <div class="post">
         <a href="{% url 'post-comment' id=post.id %}" style="text-decoration: none;">
-        <img class="post__img"
-             src="{{post.cover.url}}"
-             alt="post_1">
+            <img class="post__img"
+                 src="{{post.cover.url}}"
+                 alt="post_1">
         </a>
     </div>
-        {% endfor %}
-    </div>
-    </table>
+    {% endfor %}
+</div>
+</table>
 </div>
 
 {% endblock content %}

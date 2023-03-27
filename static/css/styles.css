@@ -302,6 +302,8 @@ padding: 24px;
 .following {
   color: #a1aab9;
   text-align:center;
+  text-decoration: none;
+
 }
 .number1,
 .number2,
@@ -358,26 +360,7 @@ display:flex;
 flex-direction:column;
 }
 
-TD {
-    vertical-align: top; /* Выравнивание по верхнему краю ячейки */
-    padding:0 1px 0 1px;
-   }
-   #col1 {
-    width: 202px; /* Ширина первой колонки */
-    height:202px;
-    background: #fc0; /* Цвет фона первой колонки */
-   }
-   #col2 {
-    width: 202px; /* Ширина второй колонки */
-    height:202px;
-    background: #f0f0f0; /* Цвет фона второй колонки */
-   }
-   #col3 {
-    width: 202px; /* Ширина третьей колонки */
-    height:202px;
-    background: #fc0; /* Цвет фона третьей колонки */
-   }
-  </style>
+
 
 
 
