@@ -8,13 +8,14 @@ class UserRegistrationForm(forms.ModelForm):
     email = forms.CharField(required=True)
     first_name = forms.CharField(required=True)
     last_name = forms.CharField(required=True)
-    password = forms.CharField(required=True)
-    password2 = forms.CharField(required=True)
     bio = forms.CharField(required=False)
     photo = forms.ImageField(required=False)
 
+    password = forms.CharField()
+    password2 = forms.CharField()
+
     class Meta:
-        model = UserProfile
+        model = User
         fields = ('username', 'email', 'first_name', 'last_name', 'bio', 'photo')
 
     def clean_password2(self):
