@@ -19,6 +19,7 @@ class SignUpView(TemplateView):
             new_user = user_form.save(commit=False)
             new_user.set_password(user_form.cleaned_data['password2'])
             new_user.save()
+            UserProfile.objects.create(user=new_user)
             new_user = authenticate(
                 username=user_form.cleaned_data['username'], password=user_form.cleaned_data['password2']
             )

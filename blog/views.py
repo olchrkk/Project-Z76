@@ -13,7 +13,7 @@ class IndexView(TemplateView):
 
     @method_decorator(login_required)
     def get(self, request):
-        followed_users = [user.id for user in request.user.profile.first().follows.all()]
+        followed_users = []
         followed_users_posts = Post.objects.filter(
             user__id__in=followed_users).order_by('-id')
         posts_recent_all = Post.objects.all().order_by(

@@ -39,45 +39,44 @@ body {
 <body class="text-center">
 <main class="form-signin w-100 m-auto">
 
-    {% if form.errors %}
+    {% if user_form.errors %}
     <div class="alert alert-danger">
-        <strong>Error!</strong> {{form.errors}}
+        <strong>Error!</strong> {{user_form.errors}}
     </div>
     {% endif %}
 
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <img class="mb-2" src="{% static 'icons/logo.png' %}" alt="" width="85" height="85">
         <h1 class="h3 mb-3 fw-normal">Create new account</h1>
 
         <div class="form-floating">
-            <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="username">
+            <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="username" required>
             <label for="floatingInput">Username</label>
         </div>
 
         <div class="form-floating">
-            <input type="text" class="form-control" id="floatingInput3" placeholder="Your name" name="first_name">
+            <input type="text" class="form-control" id="floatingInput3" placeholder="Your name" name="first_name" required>
             <label for="floatingInput3">First name</label>
         </div>
 
         <div class="form-floating">
-            <input type="text" class="form-control" id="floatingInput1" placeholder="Your sername" name="second_name">
+            <input type="text" class="form-control" id="floatingInput1" placeholder="Your sername" name="last_name" required>
             <label for="floatingInput1">Second name</label>
         </div>
 
         <div class="form-floating">
-            <input type="email" class="form-control" id="floatingInput2" placeholder="Email" name="email">
+            <input type="email" class="form-control" id="floatingInput2" placeholder="Email" name="email" required>
             <label for="floatingInput2">Email</label>
         </div>
 
         <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" required>
             <label for="floatingPassword">Password</label>
         </div>
 
         <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword1" placeholder="Repeat password"
-                   name="password2">
+            <input type="password" class="form-control" id="floatingPassword1" placeholder="Repeat password" name="password2" required>
             <label for="floatingPassword1">Repeat your password</label>
         </div>
         <div class="form-floating">
@@ -91,7 +90,7 @@ body {
         </div>
 
         <button class="w-100 btn btn-lg" style='background: linear-gradient(180deg, rgb(26, 255, 187), rgb(31, 186, 245));'
-           type="submit">Create new account</button>
+           type="submit" >Create new account</button>
     </form>
 </main>
 </body>
